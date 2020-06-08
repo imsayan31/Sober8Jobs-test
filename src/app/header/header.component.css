@@ -1,0 +1,42 @@
+.top-nav-bar {
+  width: 100%;
+}
+.top-nav-bar ul li{
+  list-style: none;
+  display: inline-block;
+  padding-right: 0.9375rem;
+  color: #838383;
+  padding-top: 5px;
+}
+.top-nav-bar ul li:first-child{
+  border-right: 1px solid #838383;
+  margin-right: 10px;
+  margin-top: 5px;
+  height: 30px;
+}
+.top-nav-bar .top-contact ul li a{
+  color: inherit;
+}
+.top-nav-bar ul li a{
+  color: #0f3880;
+}
+
+mat-toolbar {
+  width: 100%;
+}
+mat-toolbar ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+mat-toolbar ul li{
+  padding: 0 10px 0 0;
+  display: inline-block;
+}
+mat-toolbar ul li a{
+  color: #fff;
+  font-size: 14px;
+  padding: 0.2em 0.9375em;
+  text-decoration: none;
+}
