@@ -16,9 +16,11 @@
 }
 .top-nav-bar .top-contact ul li a{
   color: inherit;
+  text-decoration: none;
 }
 .top-nav-bar ul li a{
   color: #0f3880;
+  text-decoration: none;
 }
 
 mat-toolbar {
