@@ -21,6 +21,7 @@
 .top-nav-bar ul li a{
   color: #0f3880;
   text-decoration: none;
+  cursor: pointer;
 }
 
 mat-toolbar {

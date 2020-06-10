@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Log In</h2>
+<div class="close-dialog">
+  <a (click)="closeLogInModal()" class="">&times;</a>
+</div>
+<form>
+  <div>
+    <mat-form-field>
+      <input type="text" matInput placeholder="E-mail" required />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" required />
+    </mat-form-field>
+  </div>
+  <button type="submit" mat-raised-button color="primary">Log In</button>
+</form>
