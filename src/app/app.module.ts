@@ -13,12 +13,14 @@ import {
 } from '@angular/material';
 
 import { AuthModule } from './frontend/auth/auth.module';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

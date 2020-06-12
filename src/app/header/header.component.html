@@ -15,10 +15,10 @@
     <div class="col-lg-4">
       <ul>
         <li>
-          <a (click)="openLogInDialog()"><i class="fa fa-graduation-cap" aria-hidden="true"></i> I Am Candidate</a>
+          <a routerLink="auth/login"><i class="fa fa-graduation-cap" aria-hidden="true"></i> I Am Candidate</a>
         </li>
         <li>
-          <a routerLink="auth/login"><i class="fa fa-briefcase" aria-hidden="true"></i> I Am Employer</a>
+          <a (click)="openLogInDialog()"><i class="fa fa-briefcase" aria-hidden="true"></i> I Am Employer</a>
         </li>
       </ul>
     </div>
@@ -26,7 +26,7 @@
 </div>
 <mat-toolbar color="primary">
   <div class="col-sm-4">
-    <span>Sober8Jobs</span>
+    <span class="site-title"><i class="fa fa-briefcase" aria-hidden="true"></i> Find Your Jobs</span>
   </div>
   <div class="col-sm-8">
     <ul>

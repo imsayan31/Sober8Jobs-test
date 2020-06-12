@@ -43,3 +43,6 @@ mat-toolbar ul li a{
   padding: 0.2em 0.9375em;
   text-decoration: none;
 }
+.site-title{
+  text-transform: uppercase;
+}
