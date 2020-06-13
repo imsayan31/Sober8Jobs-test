@@ -14,9 +14,10 @@ const userSchema = mongoose.Schema({
   country: { type: String, required: true},
   phone: { type: String, required: true, unique: true},
   fax: { type: String},
-  isDeleted: { type: Boolean},
-  createdDtm: { type: Date, required: true},
-  updatedDtm: { type: Date, required: true},
+  hear_about: { type: String, required: true},
+  isDeleted: { type: Boolean, default: false},
+  createdDtm: { type: Date, default: Date.now},
+  updatedDtm: { type: Date, default: Date.now}
 });
 
 userSchema.plugin(uniqueValidator);

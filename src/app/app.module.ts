@@ -15,7 +15,6 @@ import {
 import { AuthModule } from './frontend/auth/auth.module';
 import { FooterComponent } from './footer/footer.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
