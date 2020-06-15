@@ -14,6 +14,7 @@ import {
 
 import { AuthModule } from './frontend/auth/auth.module';
 import { FooterComponent } from './footer/footer.component';
+import { EmployerModule } from './frontend/employer/employer.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatDialogModule,
     FormsModule,
-    AuthModule
+    AuthModule,
+    EmployerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
