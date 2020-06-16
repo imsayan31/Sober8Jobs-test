@@ -45,7 +45,7 @@ export class AuthService {
         const expiryTime = new Date(now.getTime() + (expiresIn * 1000));
         this.setAuthData(token, expiryTime, userId);
         if (response.role === 'employer') {
-          this.router.navigate(['/']);
+          this.router.navigate(['/employer/dashboard']);
         } else {
           this.router.navigate(['/']);
         }
