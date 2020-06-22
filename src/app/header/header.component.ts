@@ -12,12 +12,21 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth: boolean;
+  userRole: string;
   getAuthStatus = new Subscription();
   constructor(private matDialog: MatDialog, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.autoAuthData();
     this.isAuth = this.authService.isAuthenticated();
+    
+    /*if (this.currentRole === 'employer') {
+      this.dashboardLink = '/employer/dashboard';
+    } else {
+      this.dashboardLink = '';
+    }
+    console.log(this.currentRole);*/
+
     this.getAuthStatus = this.authService.getAuthStatus()
     .subscribe(response => {
       this.isAuth = response;
@@ -35,6 +44,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logOut() {
     /* this.router.navigate(['/auth/signup']); */
     this.authService.logOutUser();
+  }
+
+  goToProfile() {
+    this.userRole = this.authService.getUserRole();
+    if(this.userRole == 'employer') {
+      this.router.navigate(['/employer/dashboard']);
+    } else {
+      this.router.navigate(['']);
+    }
   }
 
   ngOnDestroy() {

@@ -12,6 +12,7 @@ export class AuthService {
   private isAuth = false;
   private tokenTimer: any;
   private authStatus = new Subject<boolean>();
+  private currentUserRole = 'Hii';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -33,9 +34,11 @@ export class AuthService {
       const token = response.token;
       const userId = response.userId;
       const expiresIn = response.expiry;
+      const role = response.role;
       if (token) {
         this.token = token;
         this.userId = userId;
+        this.currentUserRole = role;
         this.isAuth = true;
         this.authStatus.next(true);
         this.tokenTimer = setTimeout(() => {
@@ -43,7 +46,7 @@ export class AuthService {
         }, expiresIn * 1000);
         const now = new Date();
         const expiryTime = new Date(now.getTime() + (expiresIn * 1000));
-        this.setAuthData(token, expiryTime, userId);
+        this.setAuthData(token, expiryTime, userId, role);
         if (response.role === 'employer') {
           this.router.navigate(['/employer/dashboard']);
         } else {
@@ -68,10 +71,11 @@ export class AuthService {
   }
 
   /* Save Logged In User Data in Local Storage */
-  private setAuthData(token: string, expiresIn: Date, userId: string) {
+  private setAuthData(token: string, expiresIn: Date, userId: string, role: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiresIn', expiresIn.toISOString());
     localStorage.setItem('userId', userId);
+    localStorage.setItem('role', role);
   }
 
   /* Clear Logged In User Data from Local Storage */
@@ -79,6 +83,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiresIn');
     localStorage.removeItem('userId');
+    localStorage.removeItem('role');
   }
 
   /* Get Logged In User Data from Local Storage */
@@ -86,13 +91,15 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const expiresIn = localStorage.getItem('expiresIn');
     const userId = localStorage.getItem('userId');
+    const role = localStorage.getItem('role');
     if (!token && !expiresIn) {
       return;
     }
     return {
       token: token,
       expiresIn: new Date(expiresIn),
-      userId: userId
+      userId: userId,
+      role: role
     };
   }
 
@@ -108,6 +115,7 @@ export class AuthService {
     if (expiringTime > 0) {
       this.token = getAuthData.token;
       this.userId = getAuthData.userId;
+      this.currentUserRole = getAuthData.role;
       this.isAuth = true;
       this.authStatus.next(true);
       this.tokenTimer = setTimeout(() => {
@@ -131,7 +139,13 @@ export class AuthService {
     return this.isAuth;
   }
 
+  /* Get Auth Status */
   getAuthStatus() {
     return this.authStatus.asObservable();
+  }
+
+  /* Get User Role */
+  getUserRole() {
+    return this.currentUserRole;
   }
 }

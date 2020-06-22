@@ -1,0 +1,44 @@
+<section class="contaniner">
+  <h2>My Company</h2>
+  <div class="row">
+    <div class="col-sm-3">
+      <app-employer-sidebar></app-employer-sidebar>
+    </div>
+    <div class="col-sm-9">
+      <div class="user-inner-wrapper">
+        <div class="alert alert-success" *ngIf="successMsg">{{ successMsg }}</div>
+        <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
+        <mat-card>
+          <form [formGroup]="form" (submit)="onEmployerCompanySave()">
+            <div class="row">
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input type="text" formControlName="company_name" name="company_name" matInput placeholder="Company name*">
+                  <mat-error *ngIf="form.get('company_name').invalid">Company name is required.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field>
+                  <input type="text" formControlName="company_website" name="company_website" matInput placeholder="Website*">
+                  <mat-error *ngIf="form.get('company_website').invalid">Website is required.</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <mat-form-field>
+                  <!-- <input type="email" formControlName="email" name="email" matInput placeholder="Email*" email> -->
+                  <textarea name="company_desc" formControlName="company_desc" matInput placeholder="Description"></textarea>
+                  <!-- <mat-error *ngIf="form.get('email').invalid">Invalid email.</mat-error> -->
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="sbmt-btn">
+              <button type="submit" mat-raised-button color="primary">Save Company Info</button>
+            </div>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

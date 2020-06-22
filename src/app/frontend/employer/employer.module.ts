@@ -7,7 +7,9 @@ import { EmployerDashboardComponent } from './employer-dashboard/employer-dashbo
 import { EmployerProfileComponent } from './employer-profile/employer-profile.component';
 import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
 import { EmployerSidebarComponent } from './employer-sidebar/employer-sidebar.component';
-import { MatTreeModule, MatIconModule, MatButtonModule, MatExpansionModule } from '@angular/material';
+import { EmployerCompanyComponent } from './employer-company/employer-company.component';
+import { MatButtonModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,14 +18,21 @@ import { MatTreeModule, MatIconModule, MatButtonModule, MatExpansionModule } fro
     EmployerDashboardComponent,
     EmployerProfileComponent,
     EmployerSubscriptionComponent,
-    EmployerSidebarComponent
+    EmployerSidebarComponent,
+    EmployerCompanyComponent,
   ],
   imports: [
     CommonModule,
     EmployerRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatExpansionModule,
-    MatIconModule,
-    MatButtonModule
-  ]
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+  ],
+  providers: []
 })
 export class EmployerModule { }

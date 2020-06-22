@@ -132,4 +132,52 @@ router.post('/login', (req, res, next) => {
   })
 });
 
+/* User Profile Details */
+router.get('/profile/:userId', (req, res, next) => {
+  User.findById(req.params.userId)
+  .then(resp => {
+    res.status(200).json({
+      status: 200,
+      message: 'User retreived successfully',
+      userData: resp
+    })
+  })
+  .catch(err => {
+    res.status(404).json({
+      status: 404,
+      message: 'No user found',
+      userData: null
+    })
+  })
+});
+
+/* Save User Profile Data */
+router.put('/save-profile', (req, res, next) => {
+
+  User.updateOne(
+    {
+      _id: req.body.id
+    },
+    {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+    }
+  )
+  .then(updatedData => {
+    res.status(200).json({
+      status: 200,
+      message: 'Profile data updated successfully.',
+      updatedData: updatedData
+    });
+  })
+  .catch(error => {
+    res.status(400).json({
+      status: 400,
+      message: 'Profile data can not be updated.',
+      error: error
+    });
+  });
+
+});
+
 module.exports = router;
