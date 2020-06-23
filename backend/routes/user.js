@@ -33,6 +33,7 @@ router.post('/signup', (req, res, next) => {
       state: req.body.state,
       city: req.body.city,
       country: req.body.country,
+      zipcode: req.body.zipcode,
       phone: req.body.phone,
       fax: req.body.fax,
       hear_about: req.body.hear_about
@@ -161,6 +162,13 @@ router.put('/save-profile', (req, res, next) => {
     {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
+      phone: req.body.phone,
+      fax: req.body.fax,
+      state: req.body.state,
+      city: req.body.city,
+      country: req.body.country,
+      address1: req.body.address1,
+      zipcode: req.body.zipcode
     }
   )
   .then(updatedData => {

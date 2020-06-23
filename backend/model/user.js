@@ -12,6 +12,7 @@ const userSchema = mongoose.Schema({
   state: { type: String, required: true},
   city: { type: String, required: true},
   country: { type: String, required: true},
+  zipcode: { type: String, required: true},
   phone: { type: String, required: true, unique: true},
   fax: { type: String},
   hear_about: { type: String, required: true},

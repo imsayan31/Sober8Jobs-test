@@ -33,6 +33,42 @@
                 </mat-form-field>
               </div>
             </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" (click)="addLocation()" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>
+ Add Address</button>
+              </div>
+            </div>
+            <div class="row" formArrayName="locations" *ngFor="let item of form.get('locations').controls; let i = index;">
+              <div [formGroupName]="i" class="col-sm-3">
+                <!-- <input formControlName="name" placeholder="Item name"> -->
+                <mat-form-field>
+                  <input type="text" formControlName="country" name="country" matInput placeholder="Country*">
+                  <!-- <mat-error *ngIf="form.get('country').controls[i].invalid">Country is required.</mat-error> -->
+                </mat-form-field>
+              </div>
+              <div [formGroupName]="i" class="col-sm-3">
+                <mat-form-field>
+                  <input type="text" formControlName="state" name="state" matInput placeholder="State*">
+                  <!-- <mat-error *ngIf="form.get('state').invalid">State is required.</mat-error> -->
+                </mat-form-field>
+                <!-- <input formControlName="description" placeholder="Item description"> -->
+              </div>
+              <div [formGroupName]="i" class="col-sm-3">
+                <mat-form-field>
+                  <input type="text" formControlName="city" name="city" matInput placeholder="City*">
+                  <!-- <mat-error *ngIf="form.get('city').invalid">City is required.</mat-error> -->
+                </mat-form-field>
+                <!-- <input formControlName="price" placeholder="Item price"> -->
+              </div>
+              <div [formGroupName]="i" class="col-sm-3">
+                <mat-form-field>
+                  <input type="text" formControlName="address" name="address" matInput placeholder="Address*">
+                  <!-- <mat-error *ngIf="form.get('address').invalid">Address is required.</mat-error> -->
+                </mat-form-field>
+              </div>
+              <!-- Chosen location: {{ form.controls.locations.controls[i].controls.name.value }} -->
+            </div>
             <div class="sbmt-btn">
               <button type="submit" mat-raised-button color="primary">Save Company Info</button>
             </div>
