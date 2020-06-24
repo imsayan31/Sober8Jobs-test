@@ -40,32 +40,41 @@
               </div>
             </div>
             <div class="row" formArrayName="locations" *ngFor="let item of form.get('locations').controls; let i = index;">
-              <div [formGroupName]="i" class="col-sm-3">
+              <div [formGroupName]="i" class="col-sm-2">
                 <!-- <input formControlName="name" placeholder="Item name"> -->
                 <mat-form-field>
                   <input type="text" formControlName="country" name="country" matInput placeholder="Country*">
-                  <!-- <mat-error *ngIf="form.get('country').controls[i].invalid">Country is required.</mat-error> -->
+                  <mat-error *ngIf="locationsArr.controls[i].get('country').errors?.required">Country is required.</mat-error>
                 </mat-form-field>
               </div>
-              <div [formGroupName]="i" class="col-sm-3">
+              <div [formGroupName]="i" class="col-sm-2">
                 <mat-form-field>
                   <input type="text" formControlName="state" name="state" matInput placeholder="State*">
-                  <!-- <mat-error *ngIf="form.get('state').invalid">State is required.</mat-error> -->
+                  <mat-error *ngIf="locationsArr.controls[i].get('state').errors?.required">State is required.</mat-error>
                 </mat-form-field>
                 <!-- <input formControlName="description" placeholder="Item description"> -->
               </div>
-              <div [formGroupName]="i" class="col-sm-3">
+              <div [formGroupName]="i" class="col-sm-2">
                 <mat-form-field>
                   <input type="text" formControlName="city" name="city" matInput placeholder="City*">
-                  <!-- <mat-error *ngIf="form.get('city').invalid">City is required.</mat-error> -->
+                  <mat-error *ngIf="locationsArr.controls[i].get('city').errors?.required">City is required.</mat-error>
                 </mat-form-field>
                 <!-- <input formControlName="price" placeholder="Item price"> -->
               </div>
               <div [formGroupName]="i" class="col-sm-3">
                 <mat-form-field>
                   <input type="text" formControlName="address" name="address" matInput placeholder="Address*">
-                  <!-- <mat-error *ngIf="form.get('address').invalid">Address is required.</mat-error> -->
+                  <mat-error *ngIf="locationsArr.controls[i].get('address').errors?.required">Address is required.</mat-error>
                 </mat-form-field>
+              </div>
+              <div [formGroupName]="i" class="col-sm-2">
+                <mat-form-field>
+                  <input type="text" formControlName="zipcode" name="zipcode" matInput placeholder="Zipcode*">
+                  <mat-error *ngIf="locationsArr.controls[i].get('zipcode').errors?.required">Address is required.</mat-error>
+                </mat-form-field>
+              </div>
+              <div [formGroupName]="i" class="col-sm-1" *ngIf="i > 0">
+                <button type="button" mat-raised-button class="btn btn-sm btn-danger" (click)="removeLocation(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <!-- Chosen location: {{ form.controls.locations.controls[i].controls.name.value }} -->
             </div>

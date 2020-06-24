@@ -7,6 +7,7 @@ const router = express.Router();
 /* Loading `User` Model */
 const User = require('../model/user');
 const Company = require('../model/company');
+const CompanyAddress = require('../model/company-address');
 
 /* Employer, Job Seeker & Company Registration Process */
 router.post('/signup', (req, res, next) => {
@@ -152,6 +153,11 @@ router.get('/profile/:userId', (req, res, next) => {
   })
 });
 
+/* Company Profile Details */
+router.get('/company-profile/:companyId', (req, res, next) => {
+
+});
+
 /* Save User Profile Data */
 router.put('/save-profile', (req, res, next) => {
 
@@ -182,6 +188,75 @@ router.put('/save-profile', (req, res, next) => {
     res.status(400).json({
       status: 400,
       message: 'Profile data can not be updated.',
+      error: error
+    });
+  });
+
+});
+
+/* Save Company Profile Data */
+router.put('/save-company-profile', (req, res, next) => {
+  Company.updateOne(
+    {
+      user_id: req.body.id
+    },
+    {
+      company_name: req.body.company_name,
+      website: req.body.company_website,
+      description: req.body.company_desc
+    }
+  )
+  .then(updatedData => {
+
+    CompanyAddress.find({
+      user_id: req.body.id
+    })
+    .then(foundData => {
+      console.log('User id not found.');
+      CompanyAddress.deleteMany({
+        user_id: req.body.id
+      }).then(deletedAddr => {
+        console.log('Prev address deleted: ' + deletedAddr);
+      }).catch(errorAddress => {
+        console.log('Prev address not deleted: ' + errorAddress);
+      });
+    });
+
+    const locationCount = req.body.locations.length;
+    const locationArr = req.body.locations;
+    let i = 0;
+    for (i = 0; i < locationCount; i++) {
+      const companyAddress = new CompanyAddress({
+        user_id: req.body.id,
+        address: locationArr[i].address,
+        city: locationArr[i].city,
+        state: locationArr[i].state,
+        zipcode: locationArr[i].zipcode,
+        country: locationArr[i].country
+      });
+      companyAddress.save()
+      .then(addressStored => {
+        res.status(200).json({
+          status: 200,
+          message: 'Company profile and adrdress updated successfully.',
+          updatedData: addressStored
+        });
+      })
+      .catch(addressError => {
+        res.status(400).json({
+          status: 400,
+          message: 'Company address can not be saved.',
+          updatedData: addressError
+        });
+      })
+    }
+
+    
+  })
+  .catch(error => {
+    res.status(400).json({
+      status: 400,
+      message: 'Company profile data can not be updated.',
       error: error
     });
   });

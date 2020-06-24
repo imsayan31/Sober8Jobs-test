@@ -96,7 +96,7 @@ export class EmployerProfileComponent implements OnInit, OnDestroy {
           this.errorMsg = response.message;
         }
       }, error => {
-        this.errorMsg = error;
+        this.errorMsg = error.message;
     });
   }
 
