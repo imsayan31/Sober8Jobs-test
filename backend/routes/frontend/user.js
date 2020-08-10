@@ -1,13 +1,38 @@
 const express = require('express');
 const bcryptjs = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
+const multer = require('multer');
 
 const router = express.Router();
 
+/* Setting Up Image Storage */
+const MIME_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg',
+  'image/gif': 'gif'
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error('Invalid mime type.');
+    if(isValid) {
+      error = null;
+    }
+    cb(error, 'backend/images');
+  },
+  filename: (req, file, cb) => {
+    const filename = file.originalname.toLocaleLowerCase().split(' ').join('-');
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, filename + '-' + Date.now() + '.' + ext);
+  }
+});
+
 /* Loading `User` Model */
-const User = require('../model/user');
-const Company = require('../model/company');
-const CompanyAddress = require('../model/company-address');
+const User = require('../../model/user');
+const Company = require('../../model/company');
+const CompanyAddress = require('../../model/company-address');
 
 /* Employer, Job Seeker & Company Registration Process */
 router.post('/signup', (req, res, next) => {
@@ -154,13 +179,41 @@ router.get('/profile/:userId', (req, res, next) => {
 });
 
 /* Company Profile Details */
-router.get('/company-profile/:companyId', (req, res, next) => {
-
+router.get('/company-profile/:userId', (req, res, next) => {
+  Company.find({ 
+      user_id: req.params.userId
+    }
+  )
+  .then(compResp => {
+    CompanyAddress.find({
+      user_id: req.params.userId
+    })
+    .then(addrsResp => {
+      res.status(200).json({
+        status: 200,
+        companyInfo: compResp,
+        companyAddress: addrsResp
+      });
+    })
+    .catch(addrsErr => {
+      res.status(404).json({
+        status: 404,
+        companyInfo: compResp,
+        companyAddress: addrsErr
+      });
+    });
+  })
+  .catch(addrsErr => {
+    res.status(404).json({
+      status: 404,
+      companyInfo: addrsErr
+    });
+  })
 });
 
 /* Save User Profile Data */
-router.put('/save-profile', (req, res, next) => {
-
+router.put('/save-profile', multer({ storage: storage }).single('image'), (req, res, next) => {
+  const url = req.protocol + '://' + req.get('host');
   User.updateOne(
     {
       _id: req.body.id
@@ -195,7 +248,15 @@ router.put('/save-profile', (req, res, next) => {
 });
 
 /* Save Company Profile Data */
-router.put('/save-company-profile', (req, res, next) => {
+router.put('/save-company-profile', multer({ storage: storage }).single('image'), (req, res, next) => {
+  let imagePath;
+  if(req.file) {
+    const url = req.protocol + '://' + req.get('host');
+    imagePath = url + '/images/' + req.file.filename;
+  } else {
+    imagePath = req.body.image
+  }
+  
   Company.updateOne(
     {
       user_id: req.body.id
@@ -203,7 +264,8 @@ router.put('/save-company-profile', (req, res, next) => {
     {
       company_name: req.body.company_name,
       website: req.body.company_website,
-      description: req.body.company_desc
+      description: req.body.company_desc,
+      logoPath: imagePath
     }
   )
   .then(updatedData => {
@@ -212,18 +274,50 @@ router.put('/save-company-profile', (req, res, next) => {
       user_id: req.body.id
     })
     .then(foundData => {
-      console.log('User id not found.');
+      
       CompanyAddress.deleteMany({
         user_id: req.body.id
       }).then(deletedAddr => {
-        console.log('Prev address deleted: ' + deletedAddr);
+        console.log('Prev address deleted: ');
+        const parseLocation = JSON.parse(req.body.locations);
+        const locationCount = parseLocation.length;
+        const locationArr = parseLocation;
+        let i = 0;
+        for (i = 0; i < locationCount; i++) {
+          const companyAddress = new CompanyAddress({
+            user_id: req.body.id,
+            address: locationArr[i].address,
+            city: locationArr[i].city,
+            state: locationArr[i].state,
+            zipcode: locationArr[i].zipcode,
+            country: locationArr[i].country
+          });
+          companyAddress.save()
+          .then(addressStored => {
+            res.status(200).json({
+              status: 200,
+              message: 'Company profile and address updated successfully.',
+              updatedData: addressStored
+            });
+          })
+          .catch(addressError => {
+            res.status(400).json({
+              status: 400,
+              message: 'Company address can not be saved.',
+              updatedData: addressError
+            });
+          })
+        }
       }).catch(errorAddress => {
         console.log('Prev address not deleted: ' + errorAddress);
       });
+    }).catch(addressFoundError => {
+      
     });
-
-    const locationCount = req.body.locations.length;
-    const locationArr = req.body.locations;
+      
+    const parseLocation = JSON.parse(req.body.locations);
+    const locationCount = parseLocation.length;
+    const locationArr = parseLocation;
     let i = 0;
     for (i = 0; i < locationCount; i++) {
       const companyAddress = new CompanyAddress({
@@ -238,7 +332,7 @@ router.put('/save-company-profile', (req, res, next) => {
       .then(addressStored => {
         res.status(200).json({
           status: 200,
-          message: 'Company profile and adrdress updated successfully.',
+          message: 'Company profile and address updated successfully.',
           updatedData: addressStored
         });
       })
@@ -250,8 +344,9 @@ router.put('/save-company-profile', (req, res, next) => {
         });
       })
     }
-
     
+
+
   })
   .catch(error => {
     res.status(400).json({

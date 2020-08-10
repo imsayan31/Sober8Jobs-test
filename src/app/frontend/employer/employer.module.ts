@@ -8,6 +8,7 @@ import { EmployerProfileComponent } from './employer-profile/employer-profile.co
 import { EmployerSubscriptionComponent } from './employer-subscription/employer-subscription.component';
 import { EmployerSidebarComponent } from './employer-sidebar/employer-sidebar.component';
 import { EmployerCompanyComponent } from './employer-company/employer-company.component';
+import { EmployerJobsComponent } from './employer-jobs/employer-jobs.component';
 import { MatButtonModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EmployerSubscriptionComponent,
     EmployerSidebarComponent,
     EmployerCompanyComponent,
+    EmployerJobsComponent,
   ],
   imports: [
     CommonModule,

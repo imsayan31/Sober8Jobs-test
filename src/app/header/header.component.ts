@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { LoginComponent } from '../frontend/auth/login/login.component';
 import { AuthService } from '../frontend/auth/auth-service';
+import { AdminAuthService } from '../admin/super-admin/admin-auth/admin-auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -14,12 +15,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   userRole: string;
   getAuthStatus = new Subscription();
-  constructor(private matDialog: MatDialog, private authService: AuthService, private router: Router) { }
+  constructor(
+    private matDialog: MatDialog, 
+    private authService: AuthService, 
+    private router: Router, 
+    private adminAuthService: AdminAuthService
+    ) { }
 
   ngOnInit() {
     this.authService.autoAuthData();
     this.isAuth = this.authService.isAuthenticated();
     
+
     /*if (this.currentRole === 'employer') {
       this.dashboardLink = '/employer/dashboard';
     } else {
@@ -48,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   goToProfile() {
     this.userRole = this.authService.getUserRole();
-    if(this.userRole == 'employer') {
+    if (this.userRole === 'employer') {
       this.router.navigate(['/employer/dashboard']);
     } else {
       this.router.navigate(['']);

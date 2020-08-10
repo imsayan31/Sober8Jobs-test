@@ -12,13 +12,14 @@ export class EmployerService {
 
   /* Get User Profile Details */
   getUserProfileDetails(userId: string) {
-    return this.httpClient.get<{ status: number, message: string, userData: any}>('http://localhost:3000/api/user/profile/' + userId);
+    return this.httpClient.get<{ status: number, message: string, userData: any}>
+    ('http://localhost:3000/api/user/profile/' + userId);
   }
 
   /* Get Company Profile Details */
-  getCompanyProfileDetails(companyId: string) {
-    return this.httpClient.get<{ status: number, message: string, companyData: any}>
-    ('http://localhost:3000/api/user/company-profile/' + companyId);
+  getCompanyProfileDetails(userId: string) {
+    return this.httpClient.get<{ status: number, message: string, companyInfo: any, companyAddress: any}>
+      ('http://localhost:3000/api/user/company-profile/' + userId);
   }
 
   /* Update User Profile Details */

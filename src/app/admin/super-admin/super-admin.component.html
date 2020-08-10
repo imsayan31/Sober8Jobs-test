@@ -1,0 +1,47 @@
+<section class="container">
+	<h2>Admin Login</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<form (submit)="onAdminLogIn(adminLogIn)" #adminLogIn="ngForm">
+				<div>
+					<mat-form-field>
+						<input type="email" name="admin_email" matInput ngModel #adminEmail="ngModel" placeholder="E-mail" required>
+						<mat-error *ngIf="adminEmail.errors?.required">Email is required.</mat-error>
+					</mat-form-field>
+				</div>
+				<div>
+					<mat-form-field>
+						<input type="password" name="admin_password" matInput ngModel #adminPassword="ngModel" placeholder="Password" required>
+						<mat-error *ngIf="adminPassword.errors?.required">Password is required.</mat-error>
+					</mat-form-field>
+				</div>
+				<div>
+					<button type="submit" mat-raised-button color="primary">Log In</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<hr>
+	<!-- <h2>Registration</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<form (submit)="onAdminRegistration(adminSignUp)" #adminSignUp="ngForm">
+				<div>
+					<mat-form-field>
+						<input type="email" name="admin_email" matInput ngModel #adminEmail="ngModel" placeholder="E-mail" required>
+						<mat-error *ngIf="adminEmail.errors?.required">Email is required.</mat-error>
+					</mat-form-field>
+				</div>
+				<div>
+					<mat-form-field>
+						<input type="password" name="admin_password" matInput ngModel #adminPassword="ngModel" placeholder="Password" required>
+						<mat-error *ngIf="adminPassword.errors?.required">Password is required.</mat-error>
+					</mat-form-field>
+				</div>
+				<div>
+					<button type="submit" mat-raised-button color="primary">Sign Up</button>
+				</div>
+			</form>
+		</div>
+	</div> -->
+</section>

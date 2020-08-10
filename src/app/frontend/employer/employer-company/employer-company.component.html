@@ -9,7 +9,20 @@
         <div class="alert alert-success" *ngIf="successMsg">{{ successMsg }}</div>
         <div class="alert alert-danger" *ngIf="errorMsg">{{ errorMsg }}</div>
         <mat-card>
-          <form [formGroup]="form" (submit)="onEmployerCompanySave()">
+          <form [formGroup]="form" (submit)="onEmployerCompanySave()" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <div class="img-preview" *ngIf="imagePreview !== '' && imagePreview || form.get('image').valid">
+                <!-- <div class="img-preview" *ngIf="imagePreview !== '' && imagePreview"> -->
+                  <img [src]="imagePreview" />
+                </div>
+                <div>
+                  <button type="button" mat-stroked-button (click)="filePicker.click()">Upload Company Logo</button>
+                  <input type="file" #filePicker (change)="onImagePicked($event)"/>
+                </div>
+              </div>
+              
+            </div>
             <div class="row">
               <div class="col-sm-6">
                 <mat-form-field>
