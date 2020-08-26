@@ -14,17 +14,21 @@ export class AppComponent implements OnInit {
   isAuth: boolean;
   userRole: string;
   getAuthStatus = new Subscription();
-  constructor(private authService: AuthService, private adminAuthService: AdminAuthService) {}
+  constructor(private authService: AuthService, private adminAuthService: AdminAuthService) {
+
+  }
 
   ngOnInit() {
-  	this.isAuth = this.authService.isAuthenticated();
-  	this.getAuthStatus = this.authService.getAuthStatus()
-  	.subscribe(successMsg => {
-  		this.isAuth = successMsg;
-  		this.userRole = this.authService.getUserRole();
-  	}, errorMsg => {
 
-  	});
+    this.isAuth = this.authService.isAuthenticated();
+    this.getAuthStatus = this.authService.getAuthStatus()
+    .subscribe(successMsg => {
+      this.isAuth = successMsg;
+      this.userRole = this.authService.getUserRole();
+    }, errorMsg => {
+
+    });
+  	
   	/*this.getAdminAuthStatus = this.adminAuthService.getAuthStatus()
   	.subscribe(successMsg => {
   		this.isAdminAuth = successMsg;
@@ -33,6 +37,7 @@ export class AppComponent implements OnInit {
 
   	});*/
   }
+
 
   ngOnDestroy(){
   	this.getAuthStatus.unsubscribe();

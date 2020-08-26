@@ -1,0 +1,24 @@
+.admin-top-nav-bar {
+	padding: 10px 5px 5px 5px;
+	border-bottom: 3px solid #0f3880;
+}
+.admin-top-nav-bar img {
+	width: 155px;
+	height: 75px;
+}
+.admin-top-nav-bar a {
+	cursor: pointer;
+}
+.profile-link {
+	text-align: right;
+}
+.profile-link > .dropdown-menu {
+	right: 0;
+	/*display: block;*/
+	left: 57%;
+}
+.profile-link > .show {
+	right: 5% !important;
+	left: 40% !important;
+	width: 50%;
+}

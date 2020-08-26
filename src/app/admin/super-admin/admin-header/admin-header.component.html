@@ -1,10 +1,24 @@
 <div class="admin-top-nav-bar">
-	<div class="row">
-		<div class="col-lg-8">
-			Find Your Jobs
+	<!-- <div class="container"> -->
+		<div class="row">
+			<div class="col-sm-8">
+				<a routerLink="/admin/dashboard">
+					<img src="{{siteLogo}}" alt="Find Your Jobs" width="300">
+				</a>
+				<!-- <span class="site-title"><i class="fa fa-briefcase" aria-hidden="true"></i> </span> -->
+			</div>
+			<div class="col-sm-4">
+				<div class="profile-link">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Super Admin</a>
+				    <div class="dropdown-menu">
+				      <a class="dropdown-item" >Profile</a>
+				      <a class="dropdown-item" >Change Password</a>
+				      <div class="dropdown-divider"></div>
+				      <a class="dropdown-item" (click)="adminLogOut()">Log out</a>
+				      <!-- <a class="dropdown-item" href="#" (click)="adminLogOut()">Log out</a> -->
+				    </div>
+				</div>
+			</div>
 		</div>
-		<div class="col-lg-4"></div>
-	</div>
-	<div class="left-sidebar"></div>
-	<div class="right-sidebar"></div>
+	<!-- </div> -->
 </div>

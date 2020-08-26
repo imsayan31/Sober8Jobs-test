@@ -1,0 +1,45 @@
+.admin-sidebar {
+	background-color: #007fff;
+	color: #fff;
+	padding: 0 0 2px 0;
+	min-height: 900px;
+}
+.admin-sidebar ul {
+	list-style: none;
+	padding-left: 0;
+}
+.admin-sidebar ul > li {
+	/*padding: 10px 10px 10px 0;*/
+	font-size: 15px;
+	cursor: pointer;
+	position: relative;
+}
+.admin-sidebar ul > li: hover {
+	background-color: #045fbd;
+}
+.admin-sidebar ul li a {
+	padding: 5px 0 10px 10px;
+	display: block;
+	width: 100%;
+	font-size: 15px;
+	color: #fff;
+	text-decoration: none;
+}
+
+.admin-sidebar ul li a:hover {
+	background-color: #045fbd;
+}
+.admin-sidebar ul > li > a > i {
+	position: relative;
+	top: 2px;
+	font-size: 14px;
+}
+.admin-sidebar ul > li > a > i:nth-child(2) {
+	right: 5px;
+	position: absolute;
+	top: 12px;
+}
+.admin-sidebar > ul > li.has-sub-menu > ul.sub-menu > li > a {
+	padding-left: 30px;
+	padding-top: 10px;
+}

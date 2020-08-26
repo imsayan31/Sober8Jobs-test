@@ -49,6 +49,8 @@ export class AuthService {
         this.setAuthData(token, expiryTime, userId, role);
         if (response.role === 'employer') {
           this.router.navigate(['/employer/dashboard']);
+        } else if (response.role === 'administrator') {
+          this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['/']);
         }

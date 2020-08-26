@@ -40,6 +40,6 @@ app.use((req, res, next) => {
 
 /* Calling Routes */
 app.use('/api/user', userRoutes);
-app.use('/api/admin/user', adminRoutes);
+app.use('/api/admin/', adminRoutes);
 
 module.exports = app;

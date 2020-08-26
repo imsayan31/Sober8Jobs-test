@@ -1,0 +1,13 @@
+.admin-screen {
+	text-align: center;
+	margin: 5% auto 10% auto;
+	border: 1px solid #ccc;
+	width: 30%;
+	padding: 20px;
+	-webkit-box-shadow: 0px 3px 25px 15px rgba(63,81,181,0.22);
+	-moz-box-shadow: 0px 3px 25px 15px rgba(63,81,181,0.22);
+	box-shadow: 0px 3px 25px 15px rgba(63,81,181,0.22);
+}
+.admin-screen mat-form-field {
+	width: 100%;
+}

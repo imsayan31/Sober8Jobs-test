@@ -1,5 +1,13 @@
-<app-header *ngIf="userRole != 'administrator'"></app-header>
-<app-admin-header *ngIf="userRole === 'administrator'"></app-admin-header>
-<router-outlet></router-outlet>
-<app-footer *ngIf="userRole != 'administrator'"></app-footer>
-<app-admin-footer *ngIf="userRole === 'administrator'"></app-admin-footer>
+<div *ngIf="!isAuth">
+	<app-header></app-header>
+	<router-outlet></router-outlet>
+	<app-footer></app-footer>
+</div>
+<div *ngIf="isAuth">
+	<app-header *ngIf="userRole !== 'administrator'"></app-header>
+	<app-admin-header *ngIf="userRole === 'administrator'"></app-admin-header>
+	<router-outlet></router-outlet>
+	<app-footer *ngIf="userRole !== 'administrator'"></app-footer>
+	<app-admin-footer *ngIf="userRole === 'administrator'"></app-admin-footer>
+</div>
+

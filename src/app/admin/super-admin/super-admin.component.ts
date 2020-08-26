@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AdminAuthService } from './admin-auth/admin-auth.service';
+import { AuthService } from '../../frontend/auth/auth-service';
 
 @Component({
   selector: 'app-super-admin',
@@ -10,7 +11,7 @@ import { AdminAuthService } from './admin-auth/admin-auth.service';
 })
 export class SuperAdminComponent implements OnInit {
 
-  constructor(private adminAuthService: AdminAuthService) { }
+  constructor(private adminAuthService: AdminAuthService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,8 @@ export class SuperAdminComponent implements OnInit {
   		return;
   	}
   	let loginData = {email: loginForm.value.admin_email, password: loginForm.value.admin_password};
-  	this.adminAuthService.adminLogIn(loginData);
+  	//this.adminAuthService.adminLogIn(loginData);
+    this.authService.employerLogIn(loginData);
   }
 
   /* Admin Registration */

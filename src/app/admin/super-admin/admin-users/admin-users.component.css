@@ -1,0 +1,38 @@
+.admin-body-wrapper{
+	min-height: 900px;
+	overflow: hidden;
+	display: flex;
+  	flex-direction: column;
+  	flex: 1 1 auto;
+}
+.main-body-wrapper {
+	margin-top: 15px;
+}
+.main-body-wrapper h2 {
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+}
+.add-new {
+	float: right;
+	margin: 10px 0 20px 0;
+}
+.add-new a {
+	background: #277dd5;
+	color: #fff;
+	padding: 8px 16px 8px 8px;
+	border-radius: 7px;
+}
+.add-new a i {
+	position: relative;
+	top: 2px;
+	font-size: 15px;
+}
+.list-tbl {
+	margin-right: 15px;
+}
+.mat-table {
+	width: 100%;
+}
+.mat-paginator:first-child {
+	display: none !important;
+}

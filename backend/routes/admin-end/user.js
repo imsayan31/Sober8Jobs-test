@@ -105,4 +105,43 @@ router.post('/login', (req, res, next) => {
 	})
 });
 
+/* Get All Users */
+router.get('/get-users', (req, res, next) => {
+	const pageSize = +req.query.pageSize;
+	const currentPage = +req.query.page;
+	console.log(pageSize);
+	console.log(currentPage);
+	const userQuery = User.find(
+						{
+							role: {$ne: 'administrator'}
+						},
+						{
+							first_name: 1,
+							last_name: 1,
+							email: 1,
+							role: 1,
+							createdDtm: 1,
+							updatedDtm: 1
+						}
+					);
+	if(pageSize && currentPage) {
+		userQuery
+		.skip(pageSize * (currentPage - 1))
+		.limit(pageSize);
+	}
+	userQuery.then(usersList => {
+		res.status(200).json({
+			status: 200,
+			message: 'Users returned successfully',
+			usersList: usersList
+		})
+	}).catch(error => {
+		res.status(404).json({
+			status: 404,
+			message: 'Users not found',
+			usersList: error
+		})
+	})
+})
+
 module.exports = router;

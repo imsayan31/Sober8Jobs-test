@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService:Title) { 
+  	this.titleService.setTitle("Find Your Jobs :: Admin Dashboard");
+   }
 
   ngOnInit() {
   }
