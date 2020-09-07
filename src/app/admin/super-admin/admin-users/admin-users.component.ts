@@ -26,7 +26,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   
   getUsersSubscription = new Subscription();
   getUsers: [];
-  displayedColumns: string[] = ['name', 'email', 'role', 'createdDtm', 'updatedDtm'];
+  displayedColumns: string[] = ['name', 'email', 'role', 'createdDtm', 'updatedDtm', 'action'];
   dataSource = new MatTableDataSource();
   totalUsers = 10;
   postsPerPage = 5;
@@ -42,9 +42,10 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-  	this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage).subscribe(response => {
+  	this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, '').subscribe(response => {
   		this.getUsers = response.usersList;
 		  this.dataSource = response.usersList;
+      this.totalUsers = response.totalCount;
   	});
   	this.dataSource.paginator = this.paginator;
   }
@@ -56,20 +57,20 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    console.log(filterValue);
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+    this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, filterValue).subscribe(response => {
+      this.getUsers = response.usersList;
+      this.dataSource = response.usersList;
+      this.totalUsers = response.totalCount;
+    });
   }
 
   onChangedPage(pageData: PageEvent) {
-    console.log(pageData);
     this.currentPage = pageData.pageIndex + 1;
     this.postsPerPage = pageData.pageSize;
-    this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage).subscribe(response => {
+    this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, '').subscribe(response => {
       this.getUsers = response.usersList;
       this.dataSource = response.usersList;
+      this.totalUsers = response.totalCount;
     });
   }
 

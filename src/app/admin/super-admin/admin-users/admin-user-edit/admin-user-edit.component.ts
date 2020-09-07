@@ -1,0 +1,104 @@
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import {MatDividerModule} from '@angular/material/divider';
+
+import { AdminUserService } from '../admin-users.service';
+/*import { StringCompare } from '././././custom-validator/string-compare.validator';*/
+import { StringCompare } from 'src/app/custom-validator/string-compare.validator';
+
+@Component({
+  selector: 'app-admin-user-edit',
+  templateUrl: './admin-user-edit.component.html',
+  styleUrls: ['./admin-user-edit.component.css']
+})
+export class AdminUserEditComponent implements OnInit,OnDestroy {
+	userId: string;
+  userEditForm: FormGroup;
+  userPasswordForm: FormGroup;
+  updateProfileData: any;
+  getUserProfileDetails = new Subscription();
+
+  constructor(private route: ActivatedRoute, private adminUserService: AdminUserService) { }
+
+  ngOnInit() {
+  	this.route.paramMap.subscribe((paramMap: ParamMap) => {
+  		this.userId = paramMap.get('userId');
+  	});
+
+    /* Setting User Profile Values */
+    this.getUserProfileDetails = this.adminUserService.getUserDetails(this.userId).subscribe(userInfoDetails => {
+      this.userEditForm.setValue({
+        first_name: userInfoDetails.userInfo.first_name,
+        last_name: userInfoDetails.userInfo.last_name,
+        email: userInfoDetails.userInfo.email,
+        phone: userInfoDetails.userInfo.phone,
+        fax: userInfoDetails.userInfo.fax,
+        state: userInfoDetails.userInfo.state,
+        city: userInfoDetails.userInfo.city,
+        country: userInfoDetails.userInfo.country,
+        address1: userInfoDetails.userInfo.address1,
+        zipcode: (userInfoDetails.userInfo.zipcode) ? userInfoDetails.userInfo.zipcode : ''
+      });
+    });
+
+    /* User Edit Form Set Up */
+    this.userEditForm = new FormGroup({
+      first_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20),Validators.pattern('^[a-zA-Z ]*$')]}),
+      last_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20),Validators.pattern('^[a-zA-Z ]*$')]}),
+      email: new FormControl(null, {validators: [Validators.required, Validators.email]}),
+      phone: new FormControl(null, {validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]}),
+      fax: new FormControl(null, {validators: [Validators.pattern("^[0-9]*$")]}),
+      country: new FormControl(null, {validators: [Validators.required]}),
+      state: new FormControl(null, {validators: [Validators.required]}),
+      city: new FormControl(null, {validators: [Validators.required]}),
+      address1: new FormControl(null, {validators: [Validators.required]}),
+      zipcode: new FormControl(null, {validators: [Validators.required]}),
+    });
+
+    /* User Change Password Form Set Up */
+    this.userPasswordForm = new FormGroup({
+      old_password: new FormControl(null, {validators: [Validators.required]}),
+      new_password: new FormControl(null, {validators: [Validators.required, Validators.minLength(8)]}),
+      confirm_password: new FormControl(null, {validators: [Validators.required]}),
+    }
+    , {
+      validators: StringCompare('new_password', 'confirm_password')
+    }
+    );
+  }
+
+  /* Employer Profile Data Save */
+  onEmployerProfileSave() {
+    if (this.userEditForm.invalid) {
+      return;
+    }
+    this.updateProfileData = {
+      id: this.userId,
+      first_name: this.userEditForm.value.first_name,
+      last_name: this.userEditForm.value.last_name,
+      phone: this.userEditForm.value.phone,
+      fax: this.userEditForm.value.fax,
+      state: this.userEditForm.value.state,
+      city: this.userEditForm.value.city,
+      country: this.userEditForm.value.country,
+      address1: this.userEditForm.value.address1,
+      zipcode: this.userEditForm.value.zipcode
+    }
+    this.adminUserService.updateUserProfileDetails(this.updateProfileData).subscribe(updateResponse => {
+      console.log(updateResponse);
+    });
+  }
+
+  /* Employer Password Save */
+  onEmployerPasswordSave() {
+
+  }
+
+  ngOnDestroy() {
+    this.getUserProfileDetails.unsubscribe();
+  }
+
+}

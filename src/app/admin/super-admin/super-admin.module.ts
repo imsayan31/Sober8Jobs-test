@@ -7,7 +7,7 @@ import { MatPaginatorModule } from '@angular/material';
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
 import { SuperAdminComponent } from './super-admin.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { MatButtonModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatExpansionModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatDividerModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
@@ -20,6 +20,7 @@ import { AdminSkillsComponent } from './admin-skills/admin-skills.component';
 import { AdminSalaryScaleComponent } from './admin-salary-scale/admin-salary-scale.component';
 import { AdminPackageComponent } from './admin-package/admin-package.component';
 import { AdminGeneralSettingsComponent } from './admin-general-settings/admin-general-settings.component';
+import { AdminUserEditComponent } from './admin-users/admin-user-edit/admin-user-edit.component';
 /*import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
 
@@ -39,6 +40,7 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     AdminSalaryScaleComponent,
     AdminPackageComponent,
     AdminGeneralSettingsComponent,
+    AdminUserEditComponent,
     /*AdminHeaderComponent,
     AdminFooterComponent,*/
   ],
@@ -54,7 +56,8 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     MatSelectModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDividerModule
     //MatTableDataSource
   ]
 })

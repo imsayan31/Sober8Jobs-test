@@ -109,13 +109,14 @@ router.post('/login', (req, res, next) => {
 router.get('/get-users', (req, res, next) => {
 	const pageSize = +req.query.pageSize;
 	const currentPage = +req.query.page;
-	console.log(pageSize);
-	console.log(currentPage);
+	const searchItem = req.query.search;
+	let fetchedCount;
 	const userQuery = User.find(
 						{
 							role: {$ne: 'administrator'}
 						},
 						{
+							_id: 1,
 							first_name: 1,
 							last_name: 1,
 							email: 1,
@@ -124,17 +125,40 @@ router.get('/get-users', (req, res, next) => {
 							updatedDtm: 1
 						}
 					);
-	if(pageSize && currentPage) {
-		userQuery
-		.skip(pageSize * (currentPage - 1))
-		.limit(pageSize);
+	
+	if(searchItem) {
+		//userQuery.where('email').regex('.*' + searchItem + '.*');
+		userQuery.or([{'email': {$regex: '.*' + searchItem + '.*'}}]);
+		userQuery.or([{'first_name': {$regex: '.*' + searchItem + '.*'}}]);
+		userQuery.or([{'last_name': {$regex: '.*' + searchItem + '.*'}}]);
+		userQuery.or([{'role': {$regex: '.*' + searchItem + '.*'}}]);
+		//userQuery.or([{'createdDtm': {$regex: '.*' + searchItem + '.*'}}]);
 	}
+	//userQuery.getFilter();
+	/*var ss = userQuery.getFilter();
+	console.log(ss);
+	return;*/
 	userQuery.then(usersList => {
-		res.status(200).json({
-			status: 200,
-			message: 'Users returned successfully',
-			usersList: usersList
+		fetchedCount = usersList.length;
+		//console.log('Length is: ' + fetchedCount);
+		return fetchedCount;
+	}).then(count => {
+		if(pageSize && currentPage) {
+			userQuery
+			.skip(pageSize * (currentPage - 1))
+			.limit(pageSize);
+		}
+		userQuery.then(usersList => {
+			/*console.log('Users data: ' + usersList);
+			return;*/
+			res.status(200).json({
+				status: 200,
+				message: 'Users returned successfully',
+				usersList: usersList,
+				totalCount: count
+			});
 		})
+		
 	}).catch(error => {
 		res.status(404).json({
 			status: 404,
@@ -142,6 +166,60 @@ router.get('/get-users', (req, res, next) => {
 			usersList: error
 		})
 	})
-})
+});
+
+/* Get User Details */
+router.get('/get-user-details', (req, res, next) => {
+	const userId = req.query.userId;
+	let fetchedCount;
+	const userQuery = User.findById(userId);
+	
+	
+	userQuery.then(userInfo => {
+
+		res.status(200).json({
+			status: 200,
+			message: 'User details fetched successfully',
+			userInfo: userInfo
+		});
+	}).catch(error => {
+		res.status(404).json({
+			status: 404,
+			message: 'Users not found',
+			userInfo: error
+		})
+	})
+});
+
+router.put('/update-user-profile', (req, res, next) => {
+	User.updateOne(
+    {
+      _id: req.body.id
+    },
+    {
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      phone: req.body.phone,
+      fax: req.body.fax,
+      state: req.body.state,
+      city: req.body.city,
+      country: req.body.country,
+      address1: req.body.address1,
+      zipcode: req.body.zipcode
+    }
+  )
+  .then(updatedData => {
+    res.status(200).json({
+      status: 200,
+      message: 'User data updated successfully.'
+    });
+  })
+  .catch(error => {
+    res.status(400).json({
+      status: 400,
+      message: 'Profile data can not be updated.'
+    });
+  });
+});
 
 module.exports = router;
