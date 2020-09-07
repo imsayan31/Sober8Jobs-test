@@ -8,7 +8,7 @@
 				<div class="container">
 					<h2>User Details</h2>
 					<div class="add-new">
-						<a routerLink="admin/users" mat-raised-button color="primary"><i class="material-icons">arrow_back</i> Back</a>
+						<a routerLink="/admin/users" mat-raised-button><i class="material-icons">arrow_back</i> Back</a>
 					</div>
 					<mat-card>
 						<mat-card-title>Profile Information</mat-card-title>
@@ -92,7 +92,26 @@
 									</mat-form-field>
 								</div>
 							</div>
-							<div class="row text-center">
+							<div class="row">
+								<div class="col-sm-6">
+									<mat-form-field>
+										<mat-label>Role*</mat-label>
+										<mat-select formControlName="role">
+										    <mat-option *ngFor="let role of userRoles" [value]="role.slug">
+										      {{ role.fullname }}
+										    </mat-option>
+										  </mat-select>
+			                  			<mat-error *ngIf="userEditForm.get('role').errors?.required">Role is required.</mat-error>
+									</mat-form-field>
+								</div>
+								<!-- <div class="col-sm-6">
+									<mat-form-field>
+										<input type="text" formControlName="fax" name="fax" matInput placeholder="FAX">
+			                  			<mat-error *ngIf="userEditForm.get('fax').errors?.pattern">FAX should have only numbers.</mat-error>
+									</mat-form-field>
+								</div> -->
+							</div>
+							<div class="">
 								<button type="submit" mat-raised-button color="primary">Save</button>
 							</div>
 						</form>
@@ -130,7 +149,7 @@
 									</mat-form-field>
 								</div>
 							</div>
-							<div class="row">
+							<div class="">
 								<button type="submit" mat-raised-button color="primary">Change Password</button>
 							</div>
 						</form>

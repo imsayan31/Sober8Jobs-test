@@ -174,7 +174,6 @@ router.get('/get-user-details', (req, res, next) => {
 	let fetchedCount;
 	const userQuery = User.findById(userId);
 	
-	
 	userQuery.then(userInfo => {
 
 		res.status(200).json({
@@ -205,7 +204,8 @@ router.put('/update-user-profile', (req, res, next) => {
       city: req.body.city,
       country: req.body.country,
       address1: req.body.address1,
-      zipcode: req.body.zipcode
+      zipcode: req.body.zipcode,
+      role: req.body.role
     }
   )
   .then(updatedData => {
@@ -220,6 +220,57 @@ router.put('/update-user-profile', (req, res, next) => {
       message: 'Profile data can not be updated.'
     });
   });
+});
+
+router.put('/update-user-password', (req, res, next) => {
+	const userId = req.body.id;
+	const userQuery = User.findById(userId);
+	let userFoundIndex;
+
+	userQuery.then(userFound => {
+		if(!userFound) {
+
+		}
+		userFoundIndex = userFound;
+		return bcryptjs.compare(req.body.old_password, userFound.password);
+	  }).then(passwordMatched => {
+	  	if(!passwordMatched) {
+			res.status(404).json({
+				message: 'Your old password not matched',
+				status: 404
+			});
+		}
+		return bcryptjs.compare(req.body.new_password, userFoundIndex.password);
+	  }).then(newOldPasswordSame => {
+	  	if(newOldPasswordSame) {
+	  		res.status(404).json({
+				message: 'Your new password must be different from your current password',
+				status: 404
+			});
+	  	}
+	  	return bcryptjs.hash(req.body.new_password, 10);
+	  }).then(passwordGenerated => {
+	  	return User.updateOne(
+		    {
+		      _id: req.body.id
+		    },
+		    {
+		      password: passwordGenerated
+		    }
+		  )
+	  }).then(passwordUpdated => {
+	  	if(passwordUpdated) {
+	  		res.status(200).json({
+		      status: 200,
+		      message: 'User password updated successfully.'
+		    });
+	  	}
+	  }).catch(error => {
+	    res.status(400).json({
+	      status: 400,
+	      message: 'User not found.'
+	    });
+	  });
 });
 
 module.exports = router;

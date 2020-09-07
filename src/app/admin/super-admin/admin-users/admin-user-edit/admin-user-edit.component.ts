@@ -20,7 +20,19 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
   userPasswordForm: FormGroup;
   updateProfileData: any;
   getUserProfileDetails = new Subscription();
-
+  updatePasswordData: any;
+  userRoles = [ 
+    {
+      'slug': 'employer',
+      'fullname': 'Employer',
+    }, {
+      'slug': 'job-seeker',
+      'fullname': 'Job Seeker',
+    }, {
+      'slug': 'administrator',
+      'fullname': 'Administrator',
+    }
+  ];
   constructor(private route: ActivatedRoute, private adminUserService: AdminUserService) { }
 
   ngOnInit() {
@@ -40,7 +52,8 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
         city: userInfoDetails.userInfo.city,
         country: userInfoDetails.userInfo.country,
         address1: userInfoDetails.userInfo.address1,
-        zipcode: (userInfoDetails.userInfo.zipcode) ? userInfoDetails.userInfo.zipcode : ''
+        zipcode: (userInfoDetails.userInfo.zipcode) ? userInfoDetails.userInfo.zipcode : '',
+        role: userInfoDetails.userInfo.role
       });
     });
 
@@ -56,6 +69,7 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
       city: new FormControl(null, {validators: [Validators.required]}),
       address1: new FormControl(null, {validators: [Validators.required]}),
       zipcode: new FormControl(null, {validators: [Validators.required]}),
+      role: new FormControl(null, {validators: [Validators.required]})
     });
 
     /* User Change Password Form Set Up */
@@ -85,7 +99,8 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
       city: this.userEditForm.value.city,
       country: this.userEditForm.value.country,
       address1: this.userEditForm.value.address1,
-      zipcode: this.userEditForm.value.zipcode
+      zipcode: this.userEditForm.value.zipcode,
+      role: this.userEditForm.value.role
     }
     this.adminUserService.updateUserProfileDetails(this.updateProfileData).subscribe(updateResponse => {
       console.log(updateResponse);
@@ -94,7 +109,18 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
 
   /* Employer Password Save */
   onEmployerPasswordSave() {
+    if (this.userPasswordForm.invalid) {
+      return;
+    }
 
+    this.updatePasswordData = {
+      id: this.userId,
+      old_password: this.userPasswordForm.value.old_password,
+      new_password: this.userPasswordForm.value.new_password
+    }
+    this.adminUserService.updateUserPassword(this.updatePasswordData).subscribe(updatePassResp => {
+      console.log(updatePassResp);
+    });
   }
 
   ngOnDestroy() {

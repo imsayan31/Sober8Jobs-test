@@ -31,4 +31,10 @@ export class AdminUserService {
 		.put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-profile', userData);
 	}
 
+	/* Update User Password */
+	updateUserPassword(userPasswordData: any) {
+		return this.http
+		.put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-password', userPasswordData);
+	}
+
 }
