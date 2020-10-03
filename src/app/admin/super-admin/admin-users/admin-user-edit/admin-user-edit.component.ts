@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { Subscription } from 'rxjs';
+
+import { StringCompare } from 'src/app/custom-validator/string-compare.validator';
 
 import { AdminUserService } from '../admin-users.service';
-/*import { StringCompare } from '././././custom-validator/string-compare.validator';*/
-import { StringCompare } from 'src/app/custom-validator/string-compare.validator';
+import { Loader } from '../../../../loader/loader.service';
+import { DialogService } from 'src/app/message-dialog/dialog.service';
 
 @Component({
   selector: 'app-admin-user-edit',
@@ -15,30 +17,35 @@ import { StringCompare } from 'src/app/custom-validator/string-compare.validator
   styleUrls: ['./admin-user-edit.component.css']
 })
 export class AdminUserEditComponent implements OnInit,OnDestroy {
-	userId: string;
+  userId: string;
   userEditForm: FormGroup;
   userPasswordForm: FormGroup;
   updateProfileData: any;
   getUserProfileDetails = new Subscription();
   updatePasswordData: any;
-  userRoles = [ 
+  userRoles = [
     {
-      'slug': 'employer',
-      'fullname': 'Employer',
+      slug: 'employer',
+      fullname: 'Employer',
     }, {
-      'slug': 'job-seeker',
-      'fullname': 'Job Seeker',
+      slug: 'job-seeker',
+      fullname: 'Job Seeker',
     }, {
-      'slug': 'administrator',
-      'fullname': 'Administrator',
+      slug: 'administrator',
+      fullname: 'Administrator',
     }
   ];
-  constructor(private route: ActivatedRoute, private adminUserService: AdminUserService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private adminUserService: AdminUserService,
+    private loaderService: Loader,
+    private dialogService: DialogService
+    ) { }
 
   ngOnInit() {
-  	this.route.paramMap.subscribe((paramMap: ParamMap) => {
-  		this.userId = paramMap.get('userId');
-  	});
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.userId = paramMap.get('userId');
+    });
 
     /* Setting User Profile Values */
     this.getUserProfileDetails = this.adminUserService.getUserDetails(this.userId).subscribe(userInfoDetails => {
@@ -59,11 +66,12 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
 
     /* User Edit Form Set Up */
     this.userEditForm = new FormGroup({
-      first_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20),Validators.pattern('^[a-zA-Z ]*$')]}),
-      last_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20),Validators.pattern('^[a-zA-Z ]*$')]}),
+      first_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20), Validators.pattern('^[a-zA-Z ]*$')]}),
+      last_name: new FormControl(null, {validators: [Validators.required, Validators.maxLength(20), Validators.pattern('^[a-zA-Z ]*$')]}),
       email: new FormControl(null, {validators: [Validators.required, Validators.email]}),
-      phone: new FormControl(null, {validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]}),
-      fax: new FormControl(null, {validators: [Validators.pattern("^[0-9]*$")]}),
+      phone: new FormControl(null, {validators: [
+        Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('^[0-9]*$')]}),
+      fax: new FormControl(null, {validators: [Validators.pattern('^[0-9]*$')]}),
       country: new FormControl(null, {validators: [Validators.required]}),
       state: new FormControl(null, {validators: [Validators.required]}),
       city: new FormControl(null, {validators: [Validators.required]}),
@@ -101,9 +109,16 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
       address1: this.userEditForm.value.address1,
       zipcode: this.userEditForm.value.zipcode,
       role: this.userEditForm.value.role
-    }
+    };
+
+    this.loaderService.show();
     this.adminUserService.updateUserProfileDetails(this.updateProfileData).subscribe(updateResponse => {
-      console.log(updateResponse);
+      this.loaderService.hide();
+      if (updateResponse.status === 200) {
+        this.dialogService.showSuccessMessage(updateResponse.message);
+      } else {
+        this.dialogService.showErrorMessage(updateResponse.message);
+      }
     });
   }
 
@@ -117,8 +132,10 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
       id: this.userId,
       old_password: this.userPasswordForm.value.old_password,
       new_password: this.userPasswordForm.value.new_password
-    }
+    };
+    this.loaderService.show();
     this.adminUserService.updateUserPassword(this.updatePasswordData).subscribe(updatePassResp => {
+      this.loaderService.hide();
       console.log(updatePassResp);
     });
   }

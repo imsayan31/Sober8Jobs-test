@@ -1,24 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import {
-  MatToolbarModule,
   MatButtonModule,
   MatDialogModule,
+  MatToolbarModule,
+  MatIconModule,
 } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgModule } from '@angular/core';
 
-import { AuthModule } from './frontend/auth/auth.module';
-import { HeaderComponent } from './header/header.component';
-import { AdminHeaderComponent } from './admin/super-admin/admin-header/admin-header.component';
-import { FooterComponent } from './footer/footer.component';
 import { AdminFooterComponent } from './admin/super-admin/admin-footer/admin-footer.component';
+import { AdminHeaderComponent } from './admin/super-admin/admin-header/admin-header.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './frontend/auth/auth.module';
 import { EmployerModule } from './frontend/employer/employer.module';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 import { SuperAdminModule } from './admin/super-admin/super-admin.module';
+import { LoaderComponent } from './loader/loader.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { SuperAdminModule } from './admin/super-admin/super-admin.module';
     AdminHeaderComponent,
     FooterComponent,
     AdminFooterComponent,
+    LoaderComponent,
+    MessageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +42,12 @@ import { SuperAdminModule } from './admin/super-admin/super-admin.module';
     FormsModule,
     AuthModule,
     EmployerModule,
-    SuperAdminModule
+    SuperAdminModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [MessageDialogComponent]
 })
 export class AppModule { }

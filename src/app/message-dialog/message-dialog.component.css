@@ -1,0 +1,31 @@
+/* .backdropClassTest {
+  overflow-y: hidden;
+  background: #c0eec0;
+  color: green; */
+  /* background: #eabcbc;
+  color: #860707; */
+/* } */
+.message-success-container > .mat-dialog-container {
+  /* filter: blur(20px);
+  background-color: #caa4a4;
+  opacity: 0.7 !important; */
+  overflow-y: hidden;
+  background: #c0eec0 !important;
+  color: green !important;
+}
+.message-error-container > .mat-dialog-container {
+  /* filter: blur(20px);
+  background-color: #caa4a4;
+  opacity: 0.7 !important; */
+  overflow-y: hidden;
+  background: #eabcbc !important;
+  color: #860707 !important;
+}
+.content-container .close-btn {
+  position: relative;
+  float: right;
+}
+.content-container .content-span {
+  display: inline-block;
+  padding-right: 20px;
+}
