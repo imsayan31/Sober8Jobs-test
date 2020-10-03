@@ -13,9 +13,9 @@ export class MessageDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<MessageDialogComponent>) { }
 
   ngOnInit() {
-    /* setTimeout(() => {
+    setTimeout(() => {
       this.dialogRef.close();
-    }, 2000); */
+    }, 2000);
 
   }
 

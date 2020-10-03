@@ -1,6 +1,7 @@
 const expres = require('express');
 const bcryptjs = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
+const cryptoRandomString = require('crypto-random-string');
 
 const router = expres.Router();
 
@@ -125,7 +126,7 @@ router.get('/get-users', (req, res, next) => {
 							updatedDtm: 1
 						}
 					);
-	
+
 	if(searchItem) {
 		//userQuery.where('email').regex('.*' + searchItem + '.*');
 		userQuery.or([{'email': {$regex: '.*' + searchItem + '.*'}}]);
@@ -158,7 +159,7 @@ router.get('/get-users', (req, res, next) => {
 				totalCount: count
 			});
 		})
-		
+
 	}).catch(error => {
 		res.status(404).json({
 			status: 404,
@@ -173,7 +174,7 @@ router.get('/get-user-details', (req, res, next) => {
 	const userId = req.query.userId;
 	let fetchedCount;
 	const userQuery = User.findById(userId);
-	
+
 	userQuery.then(userInfo => {
 
 		res.status(200).json({
@@ -190,6 +191,7 @@ router.get('/get-user-details', (req, res, next) => {
 	})
 });
 
+/* Admin Update User Data */
 router.put('/update-user-profile', (req, res, next) => {
 	User.updateOne(
     {
@@ -222,6 +224,7 @@ router.put('/update-user-profile', (req, res, next) => {
   });
 });
 
+/* Admin Update User Password */
 router.put('/update-user-password', (req, res, next) => {
 	const userId = req.body.id;
 	const userQuery = User.findById(userId);
@@ -271,6 +274,47 @@ router.put('/update-user-password', (req, res, next) => {
 	      message: 'User not found.'
 	    });
 	  });
+});
+
+/* Admin Create User Profile */
+router.post('/create-user-account', (req, res, next) => {
+  const randomPassword = cryptoRandomString({ length: 10, type: 'alphanumeric' })
+
+  /* Make Password Hashed */
+  bcryptjs.hash(randomPassword, 10)
+  .then(hash => {
+    /* Setting Up User Registration Data */
+    const userData = new User({
+      email: req.body.email,
+      password: hash,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      role: req.body.role,
+      address1: req.body.address1,
+      state: req.body.state,
+      city: req.body.city,
+      country: req.body.country,
+      zipcode: req.body.zipcode,
+      phone: req.body.phone,
+      fax: req.body.fax,
+      hear_about: 'Admin Panel'
+    })
+
+    /* Create New User */
+    userData.save()
+    .then(userCreated => {
+      res.status(200).json({
+        message: 'User successfully registered.',
+        status: 200
+      });
+    })
+    .catch(userError => {
+      res.status(400).json({
+        message: 'User registration failed.',
+        status: 400
+      });
+    })
+  })
 });
 
 module.exports = router;

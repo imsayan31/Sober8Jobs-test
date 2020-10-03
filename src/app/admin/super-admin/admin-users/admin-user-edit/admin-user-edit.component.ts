@@ -10,13 +10,15 @@ import { StringCompare } from 'src/app/custom-validator/string-compare.validator
 import { AdminUserService } from '../admin-users.service';
 import { Loader } from '../../../../loader/loader.service';
 import { DialogService } from 'src/app/message-dialog/dialog.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-user-edit',
   templateUrl: './admin-user-edit.component.html',
   styleUrls: ['./admin-user-edit.component.css']
 })
-export class AdminUserEditComponent implements OnInit,OnDestroy {
+export class AdminUserEditComponent implements OnInit, OnDestroy {
+  height = '100';
   userId: string;
   userEditForm: FormGroup;
   userPasswordForm: FormGroup;
@@ -39,8 +41,11 @@ export class AdminUserEditComponent implements OnInit,OnDestroy {
     private route: ActivatedRoute,
     private adminUserService: AdminUserService,
     private loaderService: Loader,
-    private dialogService: DialogService
-    ) { }
+    private dialogService: DialogService,
+    private titleService: Title
+    ) {
+    this.titleService.setTitle('Find Your Jobs :: Edit User');
+     }
 
   ngOnInit() {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {

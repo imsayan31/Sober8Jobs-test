@@ -8,33 +8,38 @@ import { map } from 'rxjs/operators';
 })
 
 export class AdminUserService {
-	users = [];
-	constructor(private http: HttpClient) {
-		
-	}
+  users = [];
+  constructor(private http: HttpClient) {}
 
-	/* Fetch Users */
-	getUsers(pageSize: number = null, page: number = null, searchString: string = null) {
-	 return this.http
-		.get<{status: number, message: string, usersList: any, totalCount: number}>('http://localhost:3000/api/admin/get-users?pageSize=' + pageSize + '&page=' + page + '&search=' + searchString)
-	}
+  /* Fetch Users */
+  getUsers(pageSize: number = null, page: number = null, searchString: string = null) {
+    return this.http
+    .get<{status: number, message: string, usersList: any, totalCount: number}>
+    ('http://localhost:3000/api/admin/get-users?pageSize=' + pageSize + '&page=' + page + '&search=' + searchString );
+  }
 
-	/* Get User Details */
-	getUserDetails(userId: string) {
-		return this.http
-		.get<{status: number, message: string, userInfo: any }>('http://localhost:3000/api/admin/get-user-details?userId=' + userId);
-	}
+  /* Get User Details */
+  getUserDetails(userId: string) {
+    return this.http
+    .get<{status: number, message: string, userInfo: any }>('http://localhost:3000/api/admin/get-user-details?userId=' + userId);
+  }
 
-	/* Update User Details */
-	updateUserProfileDetails(userData: any) {
-		return this.http
-		.put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-profile', userData);
-	}
+  /* Update User Details */
+  updateUserProfileDetails(userData: any) {
+    return this.http
+    .put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-profile', userData);
+  }
 
-	/* Update User Password */
-	updateUserPassword(userPasswordData: any) {
-		return this.http
-		.put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-password', userPasswordData);
-	}
+  /* Update User Password */
+  updateUserPassword(userPasswordData: any) {
+    return this.http
+    .put<{status: number, message: string}>('http://localhost:3000/api/admin/update-user-password', userPasswordData);
+  }
+
+  /* Add User Data */
+  createUserProfile(userData: any) {
+    return this.http
+      .post<{ status: number, message: string }>('http://localhost:3000/api/admin/create-user-account', userData);
+  }
 
 }

@@ -16,7 +16,7 @@ export class LoaderComponent implements OnInit {
   mode = 'indeterminate';
   value = 50;
   /* isLoading: Subject<boolean> = this.loaderService.isLoading; */
-  isLoading: boolean = false;
+  isLoading:boolean = false;
 
   constructor(public loaderService: Loader) {
 
@@ -26,8 +26,6 @@ export class LoaderComponent implements OnInit {
    }
 
   ngOnInit() {
-    /* this.loaderService.hide(); */
-    console.log(this.isLoading);
   }
 
 }
