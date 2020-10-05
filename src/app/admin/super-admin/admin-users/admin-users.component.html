@@ -59,8 +59,8 @@
 				    <ng-container matColumnDef="action">
 				      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
 				      <td mat-cell *matCellDef="let user">
-				      	<a [routerLink]="['/admin/edit-users', user._id]" color="primary" mat-flat-button><i class="material-icons">create</i></a>
-				      	<a routerLink="" mat-flat-button color="warn"><i class="material-icons">delete</i></a>
+				      	<a [routerLink]="['/admin/edit-users', user._id]" class="action-edit" color="primary"><i class="material-icons">create</i></a>
+				      	<a routerLink="" color="warn" class="action-trash"><i class="material-icons">delete</i></a>
 				      </td>
 				    </ng-container>
 

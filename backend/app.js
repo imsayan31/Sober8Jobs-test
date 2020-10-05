@@ -5,12 +5,16 @@ const path = require('path');
 
 const app = express();
 
-/* Loading Separate Routes */
+/* Frontend Routes */
 const userRoutes = require('./routes/frontend/user');
+
+/* Admin Routes */
 const adminRoutes = require('./routes/admin-end/user');
+const adminCompanyRoutes = require('./routes/admin-end/company');
+const adminDashboardRoutes = require('./routes/admin-end/dashboard');
 
 /* Eshtablishing DB Connection */
-mongoose.connect('mongodb://localhost/find-your-jobs', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/find-your-jobs', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 .then((response) => {
   console.log('Find your jobs connected.');
 }).catch((error) => {
@@ -41,5 +45,8 @@ app.use((req, res, next) => {
 /* Calling Routes */
 app.use('/api/user', userRoutes);
 app.use('/api/admin/', adminRoutes);
+app.use('/api/admin-company/', adminCompanyRoutes);
+app.use('/api/admin-dashboard/', adminDashboardRoutes);
+
 
 module.exports = app;

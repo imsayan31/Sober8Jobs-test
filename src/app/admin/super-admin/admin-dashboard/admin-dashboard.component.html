@@ -4,7 +4,64 @@
 			<app-admin-sidebar></app-admin-sidebar>
 		</div>
 		<div class="col-sm-10">
-			Admin Dashboard Section Coming Soon
+      <div class="main-body-wrapper">
+        <div class="container">
+          <h2>Dashboard</h2>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <div class="dashboard-grid employer-grid">
+                <h4>Employers</h4>
+                <span>{{ totalEmployers }}</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid job-seeker-grid">
+                <h4>Job Seekers</h4>
+                <span>{{ totalJobSeekers }}</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid company-grid">
+                <h4>Companies</h4>
+                <span>{{ totalCompanies }}</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid subscription-grid">
+                <h4>Subscription</h4>
+                <span>${{ totalSubscriptions }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 20px;">
+            <div class="col-sm-3">
+              <div class="dashboard-grid employer-grid">
+                <h4>Jobs</h4>
+                <span>10</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid job-seeker-grid">
+                <h4>Job Applications</h4>
+                <span>10</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid company-grid">
+                <h4>Inboxes</h4>
+                <span>10</span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="dashboard-grid subscription-grid">
+                <h4>Subscription</h4>
+                <span>$10.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 		</div>
 	</div>
 </div>

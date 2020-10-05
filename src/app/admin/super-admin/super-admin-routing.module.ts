@@ -13,6 +13,7 @@ import { AdminUserEditComponent } from './admin-users/admin-user-edit/admin-user
 import { AdminExperienceComponent } from './admin-experience/admin-experience.component';
 import { AdminGeneralSettingsComponent } from './admin-general-settings/admin-general-settings.component';
 import { AdminUserCreateComponent } from './admin-users/admin-user-create/admin-user-create.component';
+import { AdminCompanyComponent } from './admin-company/admin-company.component';
 
 const routes: Routes = [
 { path: '', component: SuperAdminComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
 { path: 'packages', component: AdminPackageComponent },
 { path: 'salary-scales', component: AdminSalaryScaleComponent },
 { path: 'users', component: AdminUsersComponent },
+{ path: 'company-listing', component: AdminCompanyComponent },
 { path: 'edit-users/:userId', component: AdminUserEditComponent },
 { path: 'create-user', component: AdminUserCreateComponent },
 { path: 'years-of-experience', component: AdminExperienceComponent },

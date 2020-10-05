@@ -125,7 +125,7 @@ router.get('/get-users', (req, res, next) => {
 							createdDtm: 1,
 							updatedDtm: 1
 						}
-					);
+          ).sort([['createdDtm', -1]]);
 
 	if(searchItem) {
 		//userQuery.where('email').regex('.*' + searchItem + '.*');
@@ -141,7 +141,6 @@ router.get('/get-users', (req, res, next) => {
 	return;*/
 	userQuery.then(usersList => {
 		fetchedCount = usersList.length;
-		//console.log('Length is: ' + fetchedCount);
 		return fetchedCount;
 	}).then(count => {
 		if(pageSize && currentPage) {

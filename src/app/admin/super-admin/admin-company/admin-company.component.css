@@ -12,18 +12,6 @@
 	font-family: 'Open Sans', sans-serif;
 	display: inline-block;
 }
-.add-new {
-	float: right;
-	margin: 10px 0 20px 0;
-}
-.add-new a {
-	text-decoration: none;
-}
-.add-new a i {
-	position: relative;
-	top: 2px;
-	font-size: 15px;
-}
 .list-tbl {
 	margin-right: 15px;
 }
@@ -33,11 +21,11 @@
 .mat-paginator:first-child {
 	display: none !important;
 }
-table {
-	width: 100%;
-}
 .mat-form-field {
 	width: 25%;
+}
+table {
+	width: 100%;
 }
 .action-edit {
   background-color: #007bff;
@@ -53,6 +41,13 @@ table {
   border-radius: 4px;
   margin: 5px;
 }
-.action-edit i, .action-trash i {
+.action-location {
+  background-color: #318e0f;
+  color: #fff;
+  padding: 12px 6px 2px 6px;
+  border-radius: 4px;
+  margin: 5px;
+}
+.action-edit i, .action-trash i, .action-location i {
   font-size: 20px;
 }

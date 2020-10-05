@@ -1,4 +1,42 @@
 .admin-body-wrapper{
-	min-height: 500px;
+	min-height: 900px;
 	overflow: hidden;
+	display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+.main-body-wrapper {
+	margin-top: 15px;
+}
+.main-body-wrapper h2 {
+	font-family: 'Open Sans', sans-serif;
+	display: inline-block;
+}
+.main-body-wrapper .dashboard-grid {
+  padding: 20px 0 0 20px;
+  height: 150px;
+  border-radius: 4px;
+  -webkit-box-shadow: -1px -1px 21px -4px rgba(0,0,0,0.72);
+  -moz-box-shadow: -1px -1px 21px -4px rgba(0,0,0,0.72);
+  box-shadow: -1px -1px 21px -4px rgba(0,0,0,0.72);
+}
+.main-body-wrapper .employer-grid {
+  border-bottom: 4px solid #0b931a;
+}
+.main-body-wrapper .job-seeker-grid {
+  border-bottom: 4px solid #0b7393;
+}
+.main-body-wrapper .company-grid {
+  border-bottom: 4px solid #550b93;
+}
+.main-body-wrapper .subscription-grid {
+  border-bottom: 4px solid #04b785;
+}
+.main-body-wrapper .dashboard-grid h4 {
+  font-size: 1rem;
+}
+.main-body-wrapper .dashboard-grid span {
+  display: block;
+  margin-top: 20px;
+  font-size: 40px;
 }
