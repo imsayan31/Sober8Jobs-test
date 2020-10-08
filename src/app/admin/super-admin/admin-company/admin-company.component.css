@@ -51,3 +51,7 @@ table {
 .action-edit i, .action-trash i, .action-location i {
   font-size: 20px;
 }
+.company-address-container .mat-dialog-container {
+  width: 250px;
+  height: 250px
+}

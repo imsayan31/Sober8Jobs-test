@@ -18,9 +18,10 @@ import { AuthModule } from './frontend/auth/auth.module';
 import { EmployerModule } from './frontend/employer/employer.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { SuperAdminModule } from './admin/super-admin/super-admin.module';
 import { LoaderComponent } from './loader/loader.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { SuperAdminModule } from './admin/super-admin/super-admin.module';
+import { CompanyDetailsComponent } from './admin/super-admin/company-details/company-details.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     AdminFooterComponent,
     LoaderComponent,
     MessageDialogComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,6 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [MessageDialogComponent]
+  entryComponents: [MessageDialogComponent, CompanyDetailsComponent]
 })
 export class AppModule { }

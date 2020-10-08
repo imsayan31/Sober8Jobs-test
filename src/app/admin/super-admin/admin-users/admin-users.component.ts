@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material';
 
 import { AdminUserService } from './admin-users.service';
+import { Loader } from 'src/app/loader/loader.service';
 import { map, tap } from 'rxjs/operators';
 
 export interface UserData {
@@ -37,12 +38,18 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor(private http: HttpClient, private titleService: Title, private adminUserService: AdminUserService) {
+  constructor(
+    private http: HttpClient, 
+    private titleService: Title, 
+    private adminUserService: AdminUserService,
+    private loaderService: Loader
+    ) {
     this.titleService.setTitle('Find Your Jobs :: Users List');
   /* this.dataSource = new MatTableDataSource(this.getUsers); */
   }
 
   ngOnInit() {
+    this.loaderService.show();
     this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, '')
     .pipe(map(currResp => {
       const userListResp = {
@@ -65,15 +72,17 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
       return userListResp;
     }))
     .subscribe(response => {
-    this.getUsers = response.usersList;
-    this.dataSource = response.usersList;
-    this.totalUsers = response.totalCount;
+      this.loaderService.hide();
+      this.getUsers = response.usersList;
+      this.dataSource = response.usersList;
+      this.totalUsers = response.totalCount;
     });
     this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    this.loaderService.show();
     this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, filterValue)
       .pipe(map(currResp => {
         const userListResp = {
@@ -96,6 +105,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
         return userListResp;
       }))
     .subscribe(response => {
+      this.loaderService.hide();
       this.getUsers = response.usersList;
       this.dataSource = response.usersList;
       this.totalUsers = response.totalCount;
@@ -105,6 +115,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   onChangedPage(pageData: PageEvent) {
     this.currentPage = pageData.pageIndex + 1;
     this.postsPerPage = pageData.pageSize;
+    this.loaderService.show();
     this.getUsersSubscription = this.adminUserService.getUsers(this.postsPerPage, this.currentPage, '')
       .pipe(map(currResp => {
         const userListResp = {
@@ -127,6 +138,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
         return userListResp;
       }))
     .subscribe(response => {
+      this.loaderService.hide();
       this.getUsers = response.usersList;
       this.dataSource = response.usersList;
       this.totalUsers = response.totalCount;

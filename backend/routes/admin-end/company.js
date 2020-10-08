@@ -4,6 +4,7 @@ const router = express.Router();
 
 /* Loading Company Model */
 const Company = require('../../model/company');
+const CompanyAddress = require('../../model/company-address.js');
 
 /* Get Companies */
 router.get('/company-listing', (req, res, next) => {
@@ -67,7 +68,26 @@ router.get('/company-listing', (req, res, next) => {
       totalCount: 0
     })
   })
+});
 
+/* Get Company Address */
+router.get('/company-address-listing', (req, res, next) => {
+  const userId = req.query.userId;
+  CompanyAddress.find({
+    user_id: userId
+  })
+  .then(addressList => {
+    res.status(200).json({
+      status: 200,
+      companyAddress: addressList
+    });
+  })
+  .catch(addressError => {
+    res.status(400).json({
+      status: 400,
+      companyAddress: addressError
+    });
+  });
 });
 
 module.exports = router;

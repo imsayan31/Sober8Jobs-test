@@ -31,6 +31,7 @@ import { AdminGeneralSettingsComponent } from './admin-general-settings/admin-ge
 import { AdminUserEditComponent } from './admin-users/admin-user-edit/admin-user-edit.component';
 import { AdminUserCreateComponent } from './admin-users/admin-user-create/admin-user-create.component';
 import { AdminCompanyComponent } from './admin-company/admin-company.component';
+/*import { CompanyDetailsComponent } from './admin-company/company-details/company-details.component';*/
 /*import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
 
@@ -53,6 +54,7 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     AdminUserEditComponent,
     AdminUserCreateComponent,
     AdminCompanyComponent,
+    /*CompanyDetailsComponent,*/
     /*AdminHeaderComponent,
     AdminFooterComponent,*/
   ],
@@ -71,6 +73,8 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     MatPaginatorModule,
     MatDividerModule
     //MatTableDataSource
-  ]
+  ],
+  /*exports: [ CompanyDetailsComponent ]*/
+  /*entryComponents: [CompanyDetailsComponent]*/
 })
 export class SuperAdminModule { }

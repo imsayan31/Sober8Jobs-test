@@ -55,7 +55,7 @@
             <ng-container matColumnDef="action">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
               <td mat-cell *matCellDef="let user">
-                <a [routerLink]="['/admin/edit-users', user._id]" class="action-location" color="primary" title="View Location(s)"><i
+                <a href="javascript:void(0);" class="action-location" color="primary" title="View Location(s)" (click)="onViewLocation(user.user_id)"><i
                     class="material-icons">location_on</i></a>
                 <a [routerLink]="['/admin/edit-users', user._id]" class="action-edit" color="primary" title="Edit Company"><i
                     class="material-icons">create</i></a>

@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+    <div class="modal-dialog-body">
+      <div class="modal-dialog-header">
+        <h2 mat-dialog-title>Company Address</h2>
+        <a href="javascript:void(0);" (click)="closeAddressDialog()"><i class="material-icons">close</i></a>
+      </div>
+      <div class="modal-dialog-body">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Zip code</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="companyAddress.length > 0">
+            <tr *ngFor="let eachData of companyAddress;let i = index">
+              <td>{{ i }}</td>
+              <td>{{ eachData.address }}</td>
+              <td>{{ eachData.city }}</td>
+              <td>{{ eachData.state }}</td>
+              <td>{{ eachData.zipcode }}</td>
+              <td>{{ eachData.country }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="companyAddress.length == 0">
+            <tr class="text-center">
+              <td colspan="6">Address not available.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+	</div>
+</div>

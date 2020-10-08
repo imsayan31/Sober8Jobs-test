@@ -1,0 +1,21 @@
+.modal-dialog-body {
+  width: 100%;
+}
+.modal-dialog-body table {
+  width: 100%;
+}
+.modal-dialog-body table tr th {
+  border: 1px solid #333;
+  padding: 10px;
+}
+.modal-dialog-body table tr td {
+  border: 1px solid #333;
+  padding: 10px;
+}
+.modal-dialog-header h2 {
+  display: inline-block;
+}
+.modal-dialog-header a {
+  float: right;
+  color: #333;
+}
