@@ -1,0 +1,80 @@
+.home-banner-section {
+  margin-top: 15px;
+  position: relative;
+}
+.home-banner-section .banner-search {
+  position: absolute;
+  top: 50%;
+  margin: 0 auto;
+  width: 50%;
+  left: 0;
+  right: 0;
+  background: #333;
+  opacity: 0.8;
+  padding: 20px;
+  height: 200px;
+}
+h2{
+	text-align: center;
+	margin-top: 30px;
+	font-family: 'Oswald', sans-serif;
+}
+.job-listing mat-card {
+  margin: 25px;
+  border-bottom: 4px solid #fff;
+  cursor: pointer;
+  -webkit-box-shadow: -1px 1px 17px 2px rgba(0,0,0,0.57);
+  -moz-box-shadow: -1px 1px 17px 2px rgba(0,0,0,0.57);
+  box-shadow: -1px 1px 17px 2px rgba(0,0,0,0.57);
+}
+.job-listing mat-card:hover {
+  border-bottom: 4px solid #167cfa;
+}
+.job-listing mat-card mat-card-content ul{
+  padding-left: 15px;
+  margin-top: 20px;
+}
+.job-listing mat-card mat-card-content ul li{
+  list-style: none;
+  display: inline-block;
+  width: 50%;
+}
+.job-listing mat-card-footer {
+  text-align: right;
+}
+.job-listing mat-card-footer mat-card-actions {
+  margin: 0 10px 5px 0;
+  padding: 10px;
+}
+.job-listing mat-card-footer mat-card-actions button{
+  background-color: #167cfa;
+}
+.view-more-btn {
+  text-align: center;
+  margin-top: 30px;
+}
+.view-more-btn button {
+  color: #fff;
+  background-color: #167cfa;
+  border-bottom: 4px solid #167cfa;
+  padding: 15px 35px 10px;
+  border-radius: 2px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.view-more-btn button:hover {
+  color: #333;
+  background-color: #fff;
+}
+.top-companies ul {
+  padding-left: 0px;
+}
+.top-companies ul li{
+  list-style: none;
+  display: inline-block;
+}
+.top-companies ul li img{
+  width: 150px;
+  margin: 10px;
+}

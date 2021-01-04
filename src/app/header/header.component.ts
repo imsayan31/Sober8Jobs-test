@@ -14,18 +14,19 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth: boolean;
   userRole: string;
+  siteLogo = '../../assets/images/front-logo.png';
   getAuthStatus = new Subscription();
   constructor(
-    private matDialog: MatDialog, 
-    private authService: AuthService, 
-    private router: Router, 
+    private matDialog: MatDialog,
+    private authService: AuthService,
+    private router: Router,
     private adminAuthService: AdminAuthService
     ) { }
 
   ngOnInit() {
     this.authService.autoAuthData();
     this.isAuth = this.authService.isAuthenticated();
-    
+
 
     /*if (this.currentRole === 'employer') {
       this.dashboardLink = '/employer/dashboard';

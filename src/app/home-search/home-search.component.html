@@ -1,0 +1,23 @@
+<div class="search-from">
+  <form [formGroup]="homeSearchForm" (submit)="onHomeSearchSubmit()">
+    <div class="home-search-field">
+      <mat-form-field>
+        <input type="text" formControlName="keywords" placeholder="Enter keywords" matInput/>
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" formControlName="location" placeholder="Location" matInput/>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="experience" matInput>
+          <mat-option [value]="'fresher'">Fresher</mat-option>
+          <mat-option [value]="'experiened'">Experienced</mat-option>
+          <mat-option [value]="'manager'">Manager</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="home-search-field home-search-btn">
+      <button type="submit">Search Jobs</button>
+    </div>
+
+  </form>
+</div>

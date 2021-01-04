@@ -21,7 +21,7 @@
                   <input type="file" #filePicker (change)="onImagePicked($event)"/>
                 </div>
               </div>
-              
+
             </div>
             <div class="row">
               <div class="col-sm-6">
@@ -52,7 +52,7 @@
  Add Address</button>
               </div>
             </div>
-            <div class="row" formArrayName="locations" *ngFor="let item of form.get('locations').controls; let i = index;">
+            <div class="row" formArrayName="locations" *ngFor="let item of locationsArr; let i = index;">
               <div [formGroupName]="i" class="col-sm-2">
                 <!-- <input formControlName="name" placeholder="Item name"> -->
                 <mat-form-field>

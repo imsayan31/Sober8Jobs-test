@@ -47,6 +47,7 @@ export class AdminCompanyComponent implements OnInit, OnDestroy {
       this.getCompanies = companyList.companyList;
       this.dataSource = companyList.companyList;
       this.totalCompany = companyList.totalCount;
+      console.log(companyList.companyList[0].company_name);
     });
   }
 

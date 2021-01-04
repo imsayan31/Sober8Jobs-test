@@ -24,3 +24,9 @@
 	top: 2px;
 	font-size: 15px;
 }
+mat-card {
+	margin-top: 20px;
+}
+mat-form-field {
+	width: 100%;
+}

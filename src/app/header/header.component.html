@@ -32,9 +32,14 @@
     </div>
   </div>
 </div>
-<mat-toolbar color="primary">
+<mat-toolbar>
   <div class="col-sm-4">
-    <span class="site-title"><i class="fa fa-briefcase" aria-hidden="true"></i> Find Your Jobs</span>
+    <!-- <span class="site-title"><i class="fa fa-briefcase" aria-hidden="true"></i> Find Your Jobs</span> -->
+    <figure class="site-title">
+      <a routerLink="/">
+        <img [src]="siteLogo"/>
+      </a>
+    </figure>
   </div>
   <div class="col-sm-8">
     <ul>

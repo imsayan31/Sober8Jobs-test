@@ -1,0 +1,176 @@
+<section class="home-banner-section">
+  <figure>
+    <img [src]="homeBanner"/>
+  </figure>
+  <div class="banner-search">
+    <app-home-search></app-home-search>
+  </div>
+</section>
+<section class="recent-jobs">
+  <div class="container">
+    <h2>Recent Jobs</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="job-listing">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Full Stack Developer</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                <li>
+                  <i class="fa fa-briefcase" aria-hidden="true"></i>  Capgemini
+                </li>
+                <li>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i> Bengaluru
+                </li>
+              </ul>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">Apply</button>
+              </mat-card-actions>
+            </mat-card-footer>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-more-btn">
+      <button type="button">View More</button>
+    </div>
+
+  </div>
+</section>
+<section class="top-companies">
+  <div class="container">
+    <h2>Top Companies</h2>
+    <ul>
+      <li *ngFor="let company of homeTopCompanies">
+        <img [src]="company"/>
+      </li>
+    </ul>
+  </div>
+</section>

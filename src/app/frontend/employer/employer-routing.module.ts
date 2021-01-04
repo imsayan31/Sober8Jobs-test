@@ -10,7 +10,7 @@ import { EmployerCompanyComponent } from './employer-company/employer-company.co
 import { AuthGuard } from '../auth/auth-guard';
 
 const routes: Routes = [
-  { path: '', component: EmployerComponent },
+  { path: 'employer', component: EmployerComponent },
   { path: 'dashboard', component: EmployerDashboardComponent, canActivate: [AuthGuard] },
   { path: 'company', component: EmployerCompanyComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: EmployerProfileComponent, canActivate: [AuthGuard] },

@@ -13,6 +13,7 @@ import {
   MatDividerModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import { SuperAdminRoutingModule } from './super-admin-routing.module';
 import { SuperAdminComponent } from './super-admin.component';
@@ -31,6 +32,8 @@ import { AdminGeneralSettingsComponent } from './admin-general-settings/admin-ge
 import { AdminUserEditComponent } from './admin-users/admin-user-edit/admin-user-edit.component';
 import { AdminUserCreateComponent } from './admin-users/admin-user-create/admin-user-create.component';
 import { AdminCompanyComponent } from './admin-company/admin-company.component';
+import { AdminPackageCreateComponent } from './admin-package/admin-package-create/admin-package-create.component';
+import { AdminPackageEditComponent } from './admin-package/admin-package-edit/admin-package-edit.component';
 /*import { CompanyDetailsComponent } from './admin-company/company-details/company-details.component';*/
 /*import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
@@ -54,6 +57,8 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     AdminUserEditComponent,
     AdminUserCreateComponent,
     AdminCompanyComponent,
+    AdminPackageCreateComponent,
+    AdminPackageEditComponent,
     /*CompanyDetailsComponent,*/
     /*AdminHeaderComponent,
     AdminFooterComponent,*/
@@ -71,7 +76,8 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';*/
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDividerModule
+    MatDividerModule,
+    CKEditorModule
     //MatTableDataSource
   ],
   /*exports: [ CompanyDetailsComponent ]*/

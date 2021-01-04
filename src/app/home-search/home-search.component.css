@@ -1,0 +1,17 @@
+.search-from {
+  text-align: center;
+  margin-top: 30px;
+}
+.search-from form input:-ms-input-placeholder {
+  color: #fff;
+}
+.home-search-field {
+  display: inline-block;
+}
+.home-search-btn button {
+    color: #fff;
+    border: none;
+    background: #167cfa;
+    border-radius: 2px;
+    padding: 10px 15px;
+}

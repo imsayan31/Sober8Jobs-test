@@ -26,6 +26,7 @@
 
 mat-toolbar {
   width: 100%;
+  background: none;
 }
 mat-toolbar ul{
   list-style: none;
@@ -38,11 +39,19 @@ mat-toolbar ul li{
   display: inline-block;
 }
 mat-toolbar ul li a{
-  color: #fff;
+  color: #333;
   font-size: 14px;
   padding: 0.2em 0.9375em;
   text-decoration: none;
+  border-bottom: 3px solid #fff;
 }
-.site-title{
+mat-toolbar ul li a:hover{
+  border-bottom: 3px solid #167cfa;
+  border-radius: 0;
+}
+/* .site-title{
   text-transform: uppercase;
+} */
+.site-title img{
+  width: 150px;
 }

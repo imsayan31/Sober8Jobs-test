@@ -1,11 +1,15 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatDialogModule,
   MatToolbarModule,
   MatIconModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatCardModule,
+  MatSelectModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgModule } from '@angular/core';
@@ -22,6 +26,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { SuperAdminModule } from './admin/super-admin/super-admin.module';
 import { CompanyDetailsComponent } from './admin/super-admin/company-details/company-details.component';
+import { HomeComponent } from './home/home.component';
+import { HomeSearchComponent } from './home-search/home-search.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,9 @@ import { CompanyDetailsComponent } from './admin/super-admin/company-details/com
     AdminFooterComponent,
     LoaderComponent,
     MessageDialogComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    HomeComponent,
+    HomeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,12 @@ import { CompanyDetailsComponent } from './admin/super-admin/company-details/com
     EmployerModule,
     SuperAdminModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],
