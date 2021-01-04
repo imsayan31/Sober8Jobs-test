@@ -35,8 +35,8 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   pageSizeOptions = [5, 10, 25, 50];
   currentPage = 1;
   height = '100';
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private http: HttpClient, 

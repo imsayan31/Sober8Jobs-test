@@ -23,8 +23,8 @@ export class AdminCompanyComponent implements OnInit, OnDestroy {
   postsPerPage = 10;
   pageSizeOptions = [5, 10, 25, 50];
   currentPage = 1;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private http: HttpClient,
